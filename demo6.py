@@ -9,7 +9,6 @@
 """
 from selenium import webdriver
 import time
-
 chrome_driver = u'C:\\Users\\huawei\\Desktop\\python最新教案\\chromedriver_win32\chromedriver.exe'
 driver = webdriver.Chrome(executable_path=chrome_driver)
 # open the url
