@@ -10,7 +10,7 @@
 from selenium import webdriver
 import time
 import re
-
+import xlwt
 def search_product():
     time.sleep(3)
     driver.find_element_by_xpath('//*[@id="q"]').send_keys(kw+'\n')
@@ -43,6 +43,7 @@ def get_product():
 
 def next_page():
     token=search_product()
+    # token=3
     drop_down()
     get_product()
     num=1
@@ -55,7 +56,18 @@ def next_page():
         print(f'********************第{num}页{kw}商品：********************')
         get_product()
         print('-'*200)
-
+def writeExcel(excelPath, lst):
+    workbook = xlwt.Workbook()
+    # 获取第一个sheet页
+    sheet = workbook.add_sheet(kw)
+    row0 = ['商品', '价格', '购买人数', '商家', '地址', '图片']
+    for i in range(0, len(row0)):
+        sheet.write(0, i, row0[i])
+    for i in range(0, len(lst)):
+        product = lst[i]
+        for j in range(0, len(product)):
+            sheet.write(i + 1, j, product[row0[j]])
+    workbook.save(excelPath)
 if __name__ == '__main__':
     kw = input('输入你要搜索的商品：')
     product_list = []
@@ -64,4 +76,5 @@ if __name__ == '__main__':
     driver.maximize_window()
     driver.get(r'http://www.taobao.com')
     next_page()
+    writeExcel(f'./{kw}产品明细.xls',product_list)
 
