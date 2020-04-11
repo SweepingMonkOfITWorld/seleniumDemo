@@ -35,7 +35,7 @@ def get_position(index):
         temp.append(point_map[i])
     return ','.join(temp)
 
-#截图从左上角量坐标
+#截图从左上角量坐标 手动打吗也可以对接超级鹰打吗平台
 code=get_position(input('输入验证码：'))
 check_url='https://kyfw.12306.cn/passport/captcha/captcha-check'
 data={
