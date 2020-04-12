@@ -16,9 +16,9 @@ data={
 'rand': 'sjrand',
 }
 session=requests.session()
-req=session.get(url,params=data)
+response=session.get(url,params=data)
 with open('yzm.png','wb') as f:
-    f.write(req.content)
+    f.write(response.content)
 point_map={
     '1':'45,50',
     '2':'120,50',
@@ -45,5 +45,8 @@ data={
 
 }
 
-req=session.get(check_url,params=data)
-print(req.content.decode('utf-8'))
+response=session.get(check_url,params=data)
+print(response.content.decode('utf-8'))
+#为了保证是同一次请求 需要用到cookie
+cookiesjar=response.cookies
+cookies=requests.utils.dict_from_cookiejar(cookiesjar)
